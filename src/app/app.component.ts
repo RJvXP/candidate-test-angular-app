@@ -10,12 +10,13 @@ import {AuthService} from './service/auth.service';
 export class AppComponent  {
   title = 'candidate-test-angular-app';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   logout() {
     sessionStorage.setItem('token', '');
     this.authService.authenticated = false;
+    this.router.navigate(['/login']);
   }
 
 }
