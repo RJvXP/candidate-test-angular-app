@@ -10,13 +10,15 @@ import {AuthService} from './service/auth.service';
 import {APP_BASE_HREF} from '@angular/common';
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { PhonePipe } from './pipe/phone.pipe';
+import { FormDirective } from './directives/form.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ProfileComponent,
-    PhonePipe
+    PhonePipe,
+    FormDirective
   ],
   imports: [
     BrowserModule,
