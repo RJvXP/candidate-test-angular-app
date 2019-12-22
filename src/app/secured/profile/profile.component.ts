@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
 
   updatedSuccess = false;
   updatedError = false;
-
+  errorMessage = 'An error has occurred';
   firstNamePresent = true;
   lastNamePresent = true;
   emailPresent = true;
@@ -48,7 +48,6 @@ export class ProfileComponent implements OnInit {
      });
 
     const options = {headers};
-    console.log('options from update:  ' + sessionStorage.getItem('token'));
     this.http.put(environment.restUrl + '/userProfile', JSON.stringify(this.userProfile), options).subscribe((user: UserProfile) => {
        if (user) {
          this.userProfile = Object.assign({}, user);
@@ -57,8 +56,10 @@ export class ProfileComponent implements OnInit {
          this.updatedError = false;
        }
      }, error =>  {
-        this.updatedSuccess = false;
+        console.log(error);
         this.updatedError = true;
+        this.errorMessage = error.error.message || this.errorMessage;
+        this.updatedSuccess = false;
     });
   }
 
@@ -69,6 +70,7 @@ export class ProfileComponent implements OnInit {
     this.firstNamePresent = true;
     this.lastNamePresent = true;
     this.emailPresent = true;
+    this.errorMessage = undefined;
   }
 
   validateRequiredFields() {

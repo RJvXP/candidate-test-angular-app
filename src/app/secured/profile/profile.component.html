@@ -1,5 +1,5 @@
 <div class="alert alert-success" *ngIf="updatedSuccess">User Profile Updated Successfully!</div>
-<div class="alert alert-danger" *ngIf="updatedError">An Error Occurred when updating Profile</div>
+<div class="alert alert-danger" *ngIf="updatedError">{{errorMessage}}</div>
 <div class="input-group mb-md-6">
   <form role="form" class="needs-validation"(submit)="update()" *ngIf="userProfile" #userProfileForm=ngForm novalidate>
     <div class="form-group" [ngClass]="{'was-validated' : !firstNamePresent}">
