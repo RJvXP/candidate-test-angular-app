@@ -1,0 +1,54 @@
+<div class="alert alert-success" *ngIf="updatedSuccess">User Profile Updated Successfully!</div>
+<div class="alert alert-danger" *ngIf="updatedError">An Error Occurred when updating Profile</div>
+<div class="input-group mb-md-6">
+  <form role="form" class="needs-validation"(submit)="update()" *ngIf="userProfile" #userProfileForm=ngForm novalidate>
+    <div class="form-group" [ngClass]="{'was-validated' : !firstNamePresent}">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="userProfile.firstName" #firstName="ngModel" name="firstName" required  >
+      <div class="invalid-feedback" *ngIf="!firstNamePresent">First Name is Required</div>
+
+    </div>
+    <div class="form-group" [ngClass]="{'was-validated' : !lastNamePresent}">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="userProfile.lastName" #lastName="ngModel" name="lastName" required>
+      <div class="invalid-feedback" *ngIf="!lastNamePresent">Last Name is Required</div>
+    </div>
+    <div class="form-group">
+      <label for="middleInit">Middle Initial</label>
+      <input type="text" class="form-control" id="middleInit" [(ngModel)]="userProfile.middleInit" name="middleInit">
+    </div>
+    <div class="form-group">
+      <label for="address1">Address 1</label>
+      <input type="text" class="form-control" id="address1" [(ngModel)]="userProfile.address1" name="address1" >
+    </div>
+    <div class="form-group">
+      <label for="address2">Address 2</label>
+      <input type="text" class="form-control" id="address2" [(ngModel)]="userProfile.address2" name="address2" >
+    </div>
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" class="form-control" id="city" [(ngModel)]="userProfile.city" name="city" >
+    </div>
+    <div class="form-group">
+      <label for="state">State</label>
+      <input type="text" class="form-control" id="state" [(ngModel)]="userProfile.state" name="state" >
+    </div>
+    <div class="form-group">
+      <label for="zip">Zip</label>
+      <input type="number" class="form-control" id="zip" [(ngModel)]="userProfile.zip" name="zip" >
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="tel" class="form-control" id="phone" [ngModel]="userProfile.phone | phone: 'US'"  (ngModelChange)="userProfile.phone=$event" name="phone" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}">
+    </div>
+    <div class="form-group" [ngClass]="{'was-validated' : !emailPresent || !emailValid}">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="userProfile.email" name="email" [email]="true" required>
+      <div class="invalid-feedback" *ngIf="!emailPresent">Email is Required</div>
+      <div class="invalid-feedback" *ngIf="!emailValid">Email is Invalid</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-secondary" (click)="reset()" >Reset</button>
+  </form>
+
+</div>
